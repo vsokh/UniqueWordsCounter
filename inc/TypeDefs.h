@@ -7,5 +7,6 @@
 using TextChunk = std::string;
 using TextChunkOpt = std::optional<TextChunk>;
 
-using Words = std::vector<std::string>;
+using Word = std::string;
+using Words = std::vector<Word>;
 using WordsNum = std::size_t;

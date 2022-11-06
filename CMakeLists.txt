@@ -19,4 +19,7 @@ add_executable(UniqueWordsCounter
                inc/UniqueWordsCounter.h
                src/UniqueWordsCounter.cpp
 
+               inc/Exceptions.h
+               src/Exceptions.cpp
+
                src/main.cpp)

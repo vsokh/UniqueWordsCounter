@@ -9,9 +9,10 @@
 class FileChunksReader
 {
     static constexpr std::size_t MAX_TEXT_CHUNK_SIZE = 1024;
+    static constexpr char ZERO_VALUE = '\0';
 
 public:
-    explicit FileChunksReader(std::filesystem::path&& path, std::size_t chunkSize = MAX_TEXT_CHUNK_SIZE);
+    explicit FileChunksReader(const std::filesystem::path& path, std::size_t chunkSize = MAX_TEXT_CHUNK_SIZE);
     TextChunkOpt read();
 
 private:

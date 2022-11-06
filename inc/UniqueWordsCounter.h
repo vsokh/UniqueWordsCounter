@@ -5,6 +5,6 @@
 class UniqueWordsCounter
 {
 public:
-    WordsNum count(Words&& words);
+    WordsNum count(const Words& words);
 };
 
