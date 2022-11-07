@@ -20,5 +20,5 @@ public:
 private:
     std::ifstream _file{};
     std::size_t _chunkSize{MAX_TEXT_CHUNK_SIZE};
-    bool _finished{false};
+    std::atomic<bool> _finished{false};
 };
