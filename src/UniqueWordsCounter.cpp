@@ -1,7 +1,9 @@
 #include "UniqueWordsCounter.h"
 
-#include <unordered_set>
-#include <future>
+std::size_t UniqueWordsCounter::get() const
+{
+    return _uniqueWords.size();
+}
 
 void UniqueWordsCounter::count(Words&& words)
 {

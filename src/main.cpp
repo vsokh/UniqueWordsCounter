@@ -19,24 +19,36 @@ int main(int argc, char **argv)
         TextSplitter splitter;
         UniqueWordsCounter counter;
 
+        std::promise<std::size_t> promiseCounter;
+
         while (!reader.finished())
         {
             if (auto chunk = reader.read(); chunk)
             {
                 std::async(std::launch::deferred | std::launch::async,
-                        [&splitter, &counter, chunk = std::move(*chunk)]() mutable
+                        [&reader, &splitter, &counter, chunk = std::move(*chunk), &promiseCounter]() mutable
                         {
                             auto words = splitter.split(std::move(chunk));
                             counter.count(std::move(words));
+
+                            if (reader.finished())
+                            {
+                                promiseCounter.set_value(counter.get());
+                            }
                         });
             }
         }
+
+        auto fut = promiseCounter.get_future();
+        auto count = fut.get();
+        std::cout << count << std::endl;
     }
     catch (const CantOpenFileException& e)
     {
         std::cout << e.what() << std::endl;
         return EXIT_FAILURE;
     }
+
 
     return EXIT_SUCCESS;
 }

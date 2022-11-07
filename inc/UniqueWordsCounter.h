@@ -8,6 +8,7 @@ class UniqueWordsCounter
 {
 public:
     void count(Words&& words);
+    std::size_t get() const;
 
 private:
     std::unordered_set<Word> _uniqueWords{};
