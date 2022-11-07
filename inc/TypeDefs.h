@@ -9,4 +9,3 @@ using TextChunkOpt = std::optional<TextChunk>;
 
 using Word = std::string;
 using Words = std::vector<Word>;
-using WordsNum = std::size_t;

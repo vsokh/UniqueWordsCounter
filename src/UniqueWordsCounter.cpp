@@ -1,21 +1,15 @@
 #include "UniqueWordsCounter.h"
 
 #include <unordered_set>
+#include <future>
 
-WordsNum UniqueWordsCounter::count(const Words& words)
+void UniqueWordsCounter::count(Words&& words)
 {
-    WordsNum num{};
-
-    std::unordered_set<Word> set;
     std::for_each(words.begin(), words.end(),
-                  [&set, &num](const Word& word)
-    {
-        if (auto [_, inserted] = set.insert(word); inserted)
-        {
-            ++num;
-        }
-    });
-
-    return num;
+          [this](const Word& word)
+          {
+              std::lock_guard<std::mutex> guard{_mutex};
+              _uniqueWords.insert(word);
+          });
 }
 

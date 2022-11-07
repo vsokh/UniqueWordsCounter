@@ -15,7 +15,10 @@ public:
     explicit FileChunksReader(const std::filesystem::path& path, std::size_t chunkSize = MAX_TEXT_CHUNK_SIZE);
     TextChunkOpt read();
 
+    bool finished() const;
+
 private:
     std::ifstream _file{};
     std::size_t _chunkSize{MAX_TEXT_CHUNK_SIZE};
+    bool _finished{false};
 };
